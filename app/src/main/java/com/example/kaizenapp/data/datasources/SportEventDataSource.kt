@@ -1,5 +1,5 @@
 package com.example.kaizenapp.data.datasources
 
 interface SportEventDataSource {
-    suspend fun fetchSportEvents()
+    suspend fun fetchSportEvents() : SportEventListRemoteDataSource.NetworkResult
 }

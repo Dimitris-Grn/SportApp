@@ -25,11 +25,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val viewModel: SportEventViewModel = hiltViewModel()
+            viewModel.fetchSportEvent()
+
             KaizenAppTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    //KaizenApp(Modifier)
-                    val viewModel: SportEventViewModel = hiltViewModel()
-                    viewModel.fetchSportEvent()
+                    KaizenApp(Modifier)
+//                    val viewModel: SportEventViewModel = hiltViewModel()
+//                    viewModel.fetchSportEvent()
                 }
             }
         }

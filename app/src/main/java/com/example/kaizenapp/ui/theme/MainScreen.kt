@@ -10,22 +10,22 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.kaizenapp.data.model.SportEvent
+import com.google.gson.internal.LinkedTreeMap
 
 @Composable
 fun KaizenApp(modifier: Modifier) {
-    val viewModel: SportEventViewModel = hiltViewModel()
-    viewModel.fetchSportEvent()
-    val uiState = viewModel.uiState.collectAsState().value
 
+    val viewModel: SportEventViewModel = hiltViewModel()
     Column(modifier.fillMaxSize()) {
+        val uiState = viewModel.uiState.collectAsState().value
+
         when (uiState) {
             is SportUI.Loading -> Text(text = "Loading")
             is SportUI.Error -> Text(text = "Error")
             is SportUI.Success -> {
+
                 LazyColumn {
-//                    items(uiState.sportEvent) { item ->
-//                        //Text(text = item.sportName)
-//                    }
+                    val sportEventList = uiState.sportEvent
                 }
             }
 

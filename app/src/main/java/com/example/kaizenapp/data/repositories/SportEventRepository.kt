@@ -1,7 +1,8 @@
 package com.example.kaizenapp.data.repositories
 
+import android.util.Log
 import com.example.kaizenapp.data.datasources.SportEventListRemoteDataSource
-import com.example.kaizenapp.data.network.NetworkResult2
+import com.example.kaizenapp.data.model.SportEvent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -9,16 +10,7 @@ import javax.inject.Inject
 class SportEventRepository @Inject constructor(
     private val sportEventListDataSource: SportEventListRemoteDataSource
 ) {
-
-    suspend fun fetchSportEvents(): Flow<NetworkResult2<String>> = flow {
-       //  emit(sportEventListDataSource.fetchSportEvents())
+    fun testFetchSportEvents(): Flow<SportEventListRemoteDataSource.NetworkResult> = flow {
+        emit(sportEventListDataSource.fetchSportEvents())
     }
-
-    suspend fun testFetchSportEvents() {
-        sportEventListDataSource.fetchSportEvents()
-    }
-
-
-
-
 }
