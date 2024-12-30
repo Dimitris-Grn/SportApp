@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hiltAndroid)
-    kotlin("kapt")
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.compose.compiler)
     kotlin("plugin.serialization") version "1.9.24"
 }
 
@@ -31,9 +32,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-    }
-    kapt {
-        correctErrorTypes = true
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -74,7 +72,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
     implementation(libs.hilt.android)
-    kapt(libs.kapt.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.squareup.converterGson)
     implementation(libs.google.gson)
