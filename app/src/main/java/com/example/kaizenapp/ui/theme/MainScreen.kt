@@ -1,6 +1,8 @@
 package com.example.kaizenapp.ui.theme
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -80,17 +82,17 @@ fun EventItem() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "15:00:15", style = MaterialTheme.typography.bodyMedium
+                text = "15:00:15", style = MaterialTheme.typography.bodySmall
             )
             Checkbox(checked = true, onCheckedChange = null)
             Text(
-                text = "Competitor 1", style = MaterialTheme.typography.bodyMedium
+                text = "Competitor 1", style = MaterialTheme.typography.bodySmall
             )
             Text(
                 color = Color.Red, text = "vs"
             )
             Text(
-                text = "Competitor 2", style = MaterialTheme.typography.bodyMedium
+                text = "Competitor 2", style = MaterialTheme.typography.bodySmall
             )
         }
     }
@@ -98,21 +100,31 @@ fun EventItem() {
 
 @Composable
 fun LazySportEventGrid() {
-    LazyVerticalGrid(columns = GridCells.FixedSize(90.dp), content = {
+    LazyVerticalGrid(columns = GridCells.Adaptive(100.dp), content = {
         item(
             span = { GridItemSpan(maxLineSpan) }) {
-            Text("Sport 1")
-            Checkbox(checked = false, onCheckedChange = null)
-            Text("Sport 1")
+            Row(
+                modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text("Sport 1")
+                Row(
+                    modifier = Modifier.weight(1f),
+                    horizontalArrangement = Arrangement.End
+                ) {
+                    Checkbox(checked = false, onCheckedChange = null)
+                    Checkbox(checked = false, onCheckedChange = null)
+                    Text("Collapse")
+                }
+            }
         }
-        items(4) { index ->
+        items(10) { index ->
             EventItem()
         }
     })
 }
 
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun PreviewEventItemPreview() {
     KaizenAppTheme {
