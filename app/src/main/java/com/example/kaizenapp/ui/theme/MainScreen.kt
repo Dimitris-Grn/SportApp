@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.kaizenapp.data.model.ActiveEvents
 import com.google.gson.internal.LinkedTreeMap
 
 @Composable
@@ -35,32 +34,7 @@ fun KaizenApp(modifier: Modifier) {
             is SportUI.Loading -> Text(text = "Loading")
             is SportUI.Error -> Text(text = "Error")
             is SportUI.Success -> {
-                LazyColumn() {
-                    items(items = uiState.sportEvent,
-                        key = { sportEvent -> sportEvent["i"] as String }) { sportEvent ->
-                        val title = sportEvent["d"] as String
-                        Text(text = title)
 
-                        val arrayEvents: ArrayList<LinkedTreeMap<String, ActiveEvents>> =
-                            sportEvent.get("e") as ArrayList<LinkedTreeMap<String, ActiveEvents>>
-
-//                              items(
-//                                items = arrayEvents,
-//                                key = { arrayKey -> arrayKey["i"] as String }) { event ->
-//                                val time = event["tt"] as Double
-//                                val competitors = event["d"] as String
-//                                val splitCompetitors = competitors.split("-")
-//                                Column(Modifier.padding(10.dp)) {
-//                                    Text(text = "12:35:45")
-//                                    Checkbox(checked = false, onCheckedChange = null)
-//                                    Text(text = splitCompetitors[0])
-//                                    Text("vs")
-//                                    Text(text = splitCompetitors[1])
-//                                }
-//                            }
-                    }
-
-                }
             }
         }
 

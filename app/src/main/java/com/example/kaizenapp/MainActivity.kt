@@ -25,7 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val viewModel: SportEventViewModel = hiltViewModel()
-            //viewModel.fetchSportEvent()
+            viewModel.fetchSportEvent()
 
             KaizenAppTheme {
                 Surface(modifier = Modifier.fillMaxSize().padding(5.dp)) {

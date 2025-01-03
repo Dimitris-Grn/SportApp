@@ -1,20 +1,18 @@
 package com.example.kaizenapp.data.model
 
-import com.google.gson.annotations.SerializedName
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+
+data class SportData(
+    val d: String, // Sport name
+    val e: List<SportEvent>, // List of sport events
+    val i: String? // Sport identifier
+)
 
 data class SportEvent(
-    @SerializedName("d") val sport: String, // Maps "d" to "sport"
-    @SerializedName("e") val events: List<Event>? = null, // Maps "e" to "events"
-    @SerializedName("i") val id: String // Maps "i" to "id"
+    val d: String, // Event description
+    val i: Long, // Event ID
+    val sh: String, // Short event description
+    val si: String, // Sport identifier (within the category)
+    val tt: Double // Timestamp
 )
 
-data class Event(
-    @SerializedName("d") val description: String, // Maps "d" to "description"
-    @SerializedName("sh") val shortDescription: String, // Maps "sh" to "shortDescription"
-    @SerializedName("i") val id: Long, // Maps "i" to "id"
-    @SerializedName("si") val sportType: String, // Maps "si" to "sportType"
-    @SerializedName("tt") val timestamp: Double // Maps "tt" to "timestamp"
-)
-
+data class SportEventFinal(val sportName:String?, val listSportEvent: List<SportEvent>?)
