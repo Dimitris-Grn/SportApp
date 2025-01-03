@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.kaizenapp.data.datasources.SportEventListRemoteDataSource
 import com.example.kaizenapp.data.model.SportEvent
+import com.example.kaizenapp.data.model.SportEventFinal
 import com.example.kaizenapp.data.repositories.SportEventRepository
 import com.google.gson.internal.LinkedTreeMap
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,19 +23,13 @@ class SportEventViewModel @Inject constructor(
 
     fun fetchSportEvent() {
         viewModelScope.launch {
-            sportEventRepository.testFetchSportEvents().collect { response ->
-                _uiState.value = when (response) {
-                    is SportEventListRemoteDataSource.NetworkResult.Error -> {
-                        SportUI.Error("SOmethig gone wrong")
-                    }
-
-                    is SportEventListRemoteDataSource.NetworkResult.Success -> {
-                        val apiData: ArrayList<LinkedTreeMap<String, SportEvent>> =
-                            response.apiData as ArrayList<LinkedTreeMap<String, SportEvent>>
-                        SportUI.Success(apiData)
-                    }
+            sportEventRepository.testFetchSportEvents().collect({ networkResult ->
+                when (networkResult) {
+                    is SportEventListRemoteDataSource.NetworkResult.Error -> TODO()
+                    is SportEventListRemoteDataSource.NetworkResult.Success -> TODO()
                 }
-            }
+            })
+
         }
     }
 }
@@ -42,7 +37,7 @@ class SportEventViewModel @Inject constructor(
 
 sealed class SportUI {
     data object Loading : SportUI()
-    data class Success(val sportEvent: ArrayList<LinkedTreeMap<String, SportEvent>>) : SportUI()
+    data class Success(val sportEvent: ArrayList<SportEventFinal>) : SportUI()
     data class Error(val error: String) : SportUI()
 }
 

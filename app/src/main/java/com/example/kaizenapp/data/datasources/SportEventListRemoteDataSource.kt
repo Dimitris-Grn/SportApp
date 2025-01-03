@@ -20,7 +20,7 @@ class SportEventListRemoteDataSource @Inject constructor(
 ) : SportEventDataSource {
 
 
-    override suspend fun fetchSportEvents(): NetworkResult {
+    override suspend fun fetchSportEvents(): NetworkResult<List<SportEventFinal>> {
         return withContext(ioDispatcher) {
             val response = sportEventApi.fetchSportEvent()
             if (response.isSuccessful) {
@@ -55,9 +55,9 @@ class SportEventListRemoteDataSource @Inject constructor(
         return obj as? T
     }
 
-    sealed class NetworkResult {
-        data class Success(val apiData: Any?) : NetworkResult()
-        data class Error(val code: Int, val errorMsg: String?) : NetworkResult()
+    sealed class NetworkResult<out T> {
+        data class Success<out T>(val apiData: T) : NetworkResult<T>()
+        data class Error(val code: Int, val errorMsg: String?) : NetworkResult<Nothing>()
     }
 }
 
